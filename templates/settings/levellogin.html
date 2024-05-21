@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smoothie Shop : user login</title>
+    <script src="/static/js/bootstrap@5.3.3.js"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap@5.3.3.css">
+    <link rel="stylesheet" href="/static/css/nav.css">
+
+    <script src="/static/js/jQueryTable.js"></script>
+    <script src="/static/js/JSTable.js"></script>
+    <link rel="stylesheet" href="/static/css/CSSTable.css">
+</head>
+
+<body>
+
+    {% include 'nav.html' %}
+
+    <div class="container mt-3">
+
+        <div class="d-flex justify-content-between">
+            <div class="fw-bold text-success">
+                Level login
+            </div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Add Level
+            </button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Level List</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form action="/settings/userlogin/addLevelName" method="POST">
+                        <div class="modal-body">
+
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Level name</label>
+                                <input type="text" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="level name" name="levelName" required>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success" style="width: 80px;">OK</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+
+        <table id="myTable" class="display" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Level</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in data_list_level %}
+                <tr>
+                    <td>{{data[1]}}</td>
+                    <td class="d-flex">
+
+                        <div class="ms-2 me-2">
+                            <form action="/settings/userlogin/editLevelLogin" method="POST">
+                                <!-- Button trigger modal -->
+                                <a class="nav-link" aria-current="page" href="#">
+                                    <img src="/static/img/icon/pencil-square.svg" alt="" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalView{{data[0]}}">
+                                </a>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalView{{data[0]}}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5 text-black" id="exampleModalLabel">Edit User
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <input type="hidden" value="{{data[0]}}" name="no">
+
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlInput1"
+                                                        class="form-label text-black">Level Name</label>
+                                                    <input type="text" class="form-control"
+                                                        id="exampleFormControlInput1" value="{{data[1]}}"
+                                                        name="levelName" required>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-success"
+                                                    style="width: 80px;">Edit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="ms-2 me-2">
+                            <form action="/settings/userlogin/deleteLevelName" method="POST">
+                                <!-- Button trigger modal -->
+                                <a class="nav-link" aria-current="page" href="#">
+                                    <img src="/static/img/icon/trash.svg" alt="" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalDelete{{data[0]}}">
+                                </a>
+
+                                <!-- Modal Delete -->
+                                <div class="modal fade" id="exampleModalDelete{{data[0]}}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5 text-black" id="exampleModalLabel">
+                                                    Delete Level name
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Confirm delete : {{data[1]}}
+                                                <input type="hidden" name="no" value="{{data[0]}}" name="no">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <script>
+            $(document).ready(function () {
+                $("#myTable").DataTable();
+            });
+        </script>
+
+    </div>
+
+</body>
+
+</html>

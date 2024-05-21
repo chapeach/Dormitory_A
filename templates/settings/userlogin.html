@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smoothie Shop : user login</title>
+    <script src="/static/js/bootstrap@5.3.3.js"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap@5.3.3.css">
+    <link rel="stylesheet" href="/static/css/nav.css">
+
+    <script src="/static/js/jQueryTable.js"></script>
+    <script src="/static/js/JSTable.js"></script>
+    <link rel="stylesheet" href="/static/css/CSSTable.css">
+</head>
+
+<body>
+
+    {% include 'nav.html' %}
+
+    <div class="container mt-3">
+
+        <div class="d-flex justify-content-between">
+            <div class="fw-bold text-success">
+                User login
+            </div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Add User
+            </button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add User</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form action="/settings/userlogin/addUser" method="POST">
+                        <div class="modal-body">
+
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">User ID</label>
+                                <input type="text" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="User ID" name="userId" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Password</label>
+                                <input type="text" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="Password" name="password" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Level</label>
+                                <select class="form-select" aria-label="Default select example" name="level" required>
+                                    <option selected>Open this select menu</option>
+                                    {% for list in data_list_level %}
+                                    <option value="{{list[0]}}">{{list[0]}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success" style="width: 80px;">OK</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+
+        <table id="myTable" class="display" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Level</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in data1 %}
+                <tr>
+                    <td>{{data[0]}}</td>
+                    <td>{{data[2]}}</td>
+                    {% if data[3] == "enable" %}
+                    <td class="text-bg-success">{{data[3]}}</td>
+                    {% endif %}
+                    {% if data[3] == "disable" %}
+                    <td class="text-bg-secondary">{{data[3]}}</td>
+                    {% endif %}
+                    <td class="d-flex">
+
+                        <div class="ms-2 me-2">
+                            <form action="/settings/userlogin/editUser" method="POST">
+                                <!-- Button trigger modal -->
+                                <a class="nav-link" aria-current="page" href="#">
+                                    <img src="/static/img/icon/pencil-square.svg" alt="" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalView{{data[0]}}">
+                                </a>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalView{{data[0]}}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5 text-black" id="exampleModalLabel">Edit User
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <input type="hidden" value="{{data[4]}}" name="no">
+
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlInput1"
+                                                        class="form-label text-black">User
+                                                        ID</label>
+                                                    <input type="text" class="form-control"
+                                                        id="exampleFormControlInput1" value="{{data[0]}}" name="userId">
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlInput1"
+                                                        class="form-label text-black">Password</label>
+                                                    <input type="text" class="form-control"
+                                                        id="exampleFormControlInput1" value="{{data[1]}}"
+                                                        name="password">
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlInput1"
+                                                        class="form-label text-black">Level</label>
+                                                    <select class="form-select" aria-label="Default select example"
+                                                        name="level">
+                                                        <option selected>{{data[2]}}</option>
+                                                        {% for level in data_list_level %}
+                                                        {% if data[2] != level[0] %}
+                                                        <option value="{{level[0]}}">{{level[0]}}</option>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlInput1"
+                                                        class="form-label text-black">Status</label>
+                                                    <select class="form-select" aria-label="Default select example"
+                                                        name="status">
+                                                        {% if data[3] == "enable" %}
+                                                        <option selected>{{data[3]}}</option>
+                                                        <option value="disable">disable</option>
+                                                        {% endif %}
+                                                        {% if data[3] == "disable" %}
+                                                        <option selected>{{data[3]}}</option>
+                                                        <option value="enable">enable</option>
+                                                        {% endif %}
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-success"
+                                                    style="width: 80px;">Edit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="ms-2 me-2">
+                            <form action="/settings/userlogin/deleteUser" method="POST">
+                                <!-- Button trigger modal -->
+                                <a class="nav-link" aria-current="page" href="#">
+                                    <img src="/static/img/icon/trash.svg" alt="" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalDelete{{data[0]}}">
+                                </a>
+
+                                <!-- Modal Delete -->
+                                <div class="modal fade" id="exampleModalDelete{{data[0]}}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5 text-black" id="exampleModalLabel">Delete
+                                                    User
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Confirm delete user id : {{data[0]}}
+                                                <input type="hidden" name="no" value="{{data[4]}}" name="no">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <script>
+            $(document).ready(function () {
+                $("#myTable").DataTable();
+            });
+        </script>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #0F2B05;">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand text-light" href="/">Baan Sook Jai</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Dashboard
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">To Day</a></li>
+                        <li><a class="dropdown-item" href="#">Day</a></li>
+                        <li><a class="dropdown-item" href="#">Month</a></li>
+                        <li><a class="dropdown-item" href="#">Year</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" aria-current="page" href="/">Home</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Employee
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/employee/list">Employee list</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Settings
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">xxx</a></li>
+                        <li><a class="dropdown-item" href="#">xxx</a></li>
+                        <li><a class="dropdown-item" href="#">xxx</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/settings/userlogin">user login</a></li>
+                        <li><a class="dropdown-item" href="/settings/level">level login</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+
+            <div class="d-flex justify-content-center text-light" role="search">
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="/static/img/icon/person.svg" alt=""
+                                class="me-1 icon-person">{{ session["UserId"] }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Your Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/fn_logout">Log out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+
+</nav>
