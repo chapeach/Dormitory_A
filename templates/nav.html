@@ -1,8 +1,6 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #0F2B05;">
-
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-
-        <a class="navbar-brand text-light" href="/">Baan Sook Jai</a>
+        <a class="navbar-brand" href="/">Dormitory</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -12,35 +10,31 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Dashboard
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">To Day</a></li>
-                        <li><a class="dropdown-item" href="#">Day</a></li>
-                        <li><a class="dropdown-item" href="#">Month</a></li>
-                        <li><a class="dropdown-item" href="#">Year</a></li>
-                    </ul>
-                </li>
-
                 <li class="nav-item">
-                    <a class="nav-link text-light" aria-current="page" href="/">Home</a>
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Employee
+                        Dropdown
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/employee/list">Employee list</a></li>
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Settings
                     </a>
@@ -58,28 +52,16 @@
 
             </ul>
 
-            <div class="d-flex justify-content-center text-light" role="search">
-
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <img src="/static/img/icon/person.svg" alt=""
-                                class="me-1 icon-person">{{ session["UserId"] }}
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Your Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="/fn_logout">Log out</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
+            <div class="d-flex justify-content-around frm_line_top">
+                <div class="btn_username">
+                    <a class="dropdown-item" href="#">{{session["UserId"]}}</a>
+                </div>
+                <div class="btn_logout">
+                    <a class="dropdown-item" href="/fn_logout">Log out</a>
+                </div>
             </div>
 
         </div>
-    </div>
 
+    </div>
 </nav>
